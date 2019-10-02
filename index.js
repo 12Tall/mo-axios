@@ -24,8 +24,17 @@ const msgCode = {
     "-1": "获取数据出错",
     0: "获取数据成功",
     1: "身份验证失败",
-    2: "用户无权访问该模块"
+    2: "用户无权访问该模块",
+    3: "身份验证通过"
 };
+
+
+var onLogFailed = function () {
+    ElementUI.Message.error(msgCode[1]);
+}
+var onLogSuccess = function () {
+    ElementUI.Message.success(3);
+}
 
 
 Axios.default.timeout = 5000;  //
@@ -44,10 +53,20 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
     response => {
         const data = response.data;
-        if (data.code !== 0) {
-            ElementUI.Message.error(msgCode[data.code]);
+        const code = data.code;
+        if (code === 0) {
+            return data.data;
+        } else if (code === -1) {
+            ElementUI.Message.error(msgCode[code]);
+            return null;
+        } else if (code === 1) {
+            onLogFailed();
+        } else if (code === 3) {
+            onLogSuccess();
+        } else {
+            ElementUI.Message.warning(msgCode[code]);
+            return null;
         }
-        return response;
     },
     error => {
         const status = error.response.status;
@@ -71,4 +90,11 @@ module.exports = {
                 .catch(err => reject(err));
         })
     },
+    setMethod: ({LogFailed, LogSuccess} = {
+        LogFailed: onLogFailed,
+        LogSuccess: onLogSuccess
+    }) => {
+        onLogSuccess = LogSuccess;
+        onLogFailed = LogFailed;
+    }
 }
