@@ -28,7 +28,7 @@ const msgCode = {
     3: "身份验证通过"
 };
 
-
+// 登录状态的验证
 var onLogFailed = function () {
     ElementUI.Message.error(msgCode[1]);
 }
@@ -36,10 +36,12 @@ var onLogSuccess = function () {
     ElementUI.Message.success(3);
 }
 
-
+// 默认延时
 Axios.default.timeout = 5000;  //
+//
 Axios.default.baseURL = '';  //
 
+// 请求拦截
 Axios.interceptors.request.use(
     config => {
         return config;
@@ -50,22 +52,28 @@ Axios.interceptors.request.use(
     }
 );
 
+// 响应拦截
 Axios.interceptors.response.use(
     response => {
         const data = response.data;
         const code = data.code;
         if (code === 0) {
+            // 正常
             return data.data;
         } else if (code === -1) {
+            // 异常
             ElementUI.Message.error(msgCode[code]);
             return null;
         } else if (code === 1) {
+            // 用户身份验证失败
             onLogFailed();
             return null;
         } else if (code === 3) {
+            // 登录成功
             onLogSuccess();
             return data.data;
         } else {
+            // 其他
             ElementUI.Message.warning(msgCode[code]);
             return null;
         }
