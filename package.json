@@ -1,6 +1,6 @@
 {
   "name": "mo-axios",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "[caution!]this module is available for private project only",
   "main": "index.js",
   "scripts": {
