@@ -61,8 +61,10 @@ Axios.interceptors.response.use(
             return null;
         } else if (code === 1) {
             onLogFailed();
+            return null;
         } else if (code === 3) {
             onLogSuccess();
+            return data.data;
         } else {
             ElementUI.Message.warning(msgCode[code]);
             return null;
