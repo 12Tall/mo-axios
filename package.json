@@ -1,0 +1,29 @@
+{
+  "name": "mo-axios",
+  "version": "0.0.2",
+  "description": "[caution!]this module is available for private project only",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "12tall",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "element-ui": "^2.12.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/12Tall/mo-axios.git"
+  },
+  "keywords": [
+    "axios",
+    "package",
+    "personal"
+  ],
+  "bugs": {
+    "url": "https://github.com/12Tall/mo-axios/issues"
+  },
+  "homepage": "https://github.com/12Tall/mo-axios#readme"
+}
