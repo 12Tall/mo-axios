@@ -37,9 +37,10 @@ var onLogSuccess = function () {
 }
 
 // 默认延时
-Axios.default.timeout = 5000;  //
+Axios.defaults.timeout = 10000;  //
 //
-Axios.default.baseURL = '';  //
+Axios.defaults.baseURL = '';  //
+Axios.defaults.withCredentials = true;
 
 // 请求拦截
 Axios.interceptors.request.use(
@@ -106,5 +107,8 @@ module.exports = {
     }) => {
         onLogSuccess = LogSuccess;
         onLogFailed = LogFailed;
+    },
+    setBaseURL: function (baseUrl = '') {
+        Axios.defaults.baseURL = baseUrl;
     }
 }
