@@ -86,7 +86,7 @@ Axios.interceptors.response.use(
     }
 );
 
-module.exports = {
+export default {
     get: (url, params = {}) => {
         return new Promise((resolve, reject) => {
             Axios.get(url, params)
