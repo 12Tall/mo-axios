@@ -68,7 +68,7 @@ Axios.interceptors.response.use(
         } else if (code === 1) {
             // 用户身份验证失败
             onLogFailed();
-            return null;
+            return Promise.reject(response.data)
         } else if (code === 3) {
             // 登录成功
             onLogSuccess();
@@ -76,7 +76,7 @@ Axios.interceptors.response.use(
         } else {
             // 其他
             ElementUI.Message.warning(msgCode[code]);
-            return null;
+            return Promise.reject(response.data)
         }
     },
     error => {
